@@ -1,9 +1,10 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
+import React from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { Box} from "@mui/material"
+import { Box} from "@mui/material";
 
 const InputData = ({handleSubmit, setEntryPoint, setDestinationPoint}) => {
   return (
@@ -39,6 +40,6 @@ const InputData = ({handleSubmit, setEntryPoint, setDestinationPoint}) => {
       </Button>
     </Box>
   );
-}
+};
 
 export default InputData;

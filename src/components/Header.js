@@ -1,5 +1,5 @@
-import { Typography } from '@mui/material';
-import React from 'react';
+import { Typography } from "@mui/material";
+import React from "react";
 
 const Header = () => {
   return (
@@ -21,6 +21,6 @@ const Header = () => {
       </Typography>
     </div>
   );
-}
+};
 
 export default Header;

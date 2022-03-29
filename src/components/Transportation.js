@@ -1,14 +1,12 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import TableCell from "@mui/material/TableCell";
-import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import TramIcon from "@mui/icons-material/Tram";
 import DirectionsBoatIcon from "@mui/icons-material/DirectionsBoat";
 import SubwayIcon from "@mui/icons-material/Subway";
 import { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
-
-
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -20,16 +18,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-
-
 const Transportation = ({ item }) => {
   return (
     <>
       <StyledTableCell component="th" scope="row">
-         {/* {item.mode === "WALK" && (
-          <DirectionsWalkIcon sx={{ fontSize: 40, color: "#890F0D" }} />
-        )}  */}
-
         {item.mode === "BUS" && (
           <DirectionsBusIcon sx={{ fontSize: 40, color: "gold" }} />
         )}
