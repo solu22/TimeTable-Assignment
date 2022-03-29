@@ -1,6 +1,5 @@
-import "./App.css";
-import { useLazyQuery } from "@apollo/client";
 
+import { useLazyQuery } from "@apollo/client";
 import graphQlQuery from "./graphQLQuery";
 
 import { useEffect, useState } from "react";
@@ -19,11 +18,15 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import getLocation from "./components/getLocation";
 import { useSelector } from "react-redux";
-import rootReducer from "./redux/reducers.js";
+import Loader from "./components/Loader";
 
 function App() {
+
   const [entryPoint, setEntryPoint] = useState("");
   const [destinationPoint, setDestinationPoint] = useState("");
+  const [search, {data, loading}] = useLazyQuery(graphQlQuery);
+  
+  
   const [coordinates, setCoordinates] = useState({
     sourceLat: "",
     sourceLong: "",
@@ -31,20 +34,21 @@ function App() {
     desLong: "",
   });
 
-  const [search, { data, loading }] = useLazyQuery(graphQlQuery);
 
-  const {currentLattitude, currentLongitude} = useSelector(state=>state.dataReducer)
-  
-  useEffect(()=>{
-   getLocation()
-  },[])
+
+  const { currentLattitude, currentLongitude } = useSelector(
+    (state) => state.dataReducer
+  );
+
+  useEffect(() => {
+    getLocation();
+  }, []);
 
   useEffect(() => {
     fetchCoordinatesForPoint();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entryPoint, destinationPoint]);
 
-  if (loading) return <p>Loading....</p>;
+  if(loading) return <Loader/>;
 
   let url = "https://api.digitransit.fi/geocoding/v1/search";
 
@@ -53,15 +57,17 @@ function App() {
       url + "?text=" + entryPoint.replace(" ", "%20") + "&size=1"
     );
 
-    console.log("sourcelat", sourceAdress);
-
     let destinationAdress = await axios.get(
       url + "?text=" + destinationPoint.replace(" ", "%20") + "&size=1"
     );
 
     const coordinates = {
-      sourceLat: sourceAdress.data.features[0].geometry.coordinates[1] || currentLattitude,
-      sourceLong: sourceAdress.data.features[0].geometry.coordinates[0] || currentLongitude,
+      sourceLat:
+        sourceAdress.data.features[0].geometry.coordinates[1] ||
+        currentLattitude,
+      sourceLong:
+        sourceAdress.data.features[0].geometry.coordinates[0] ||
+        currentLongitude,
       desLat: destinationAdress.data.features[0].geometry.coordinates[1],
       desLong: destinationAdress.data.features[0].geometry.coordinates[0],
     };
@@ -79,6 +85,8 @@ function App() {
       },
     });
   };
+
+  
 
   return (
     <Container>

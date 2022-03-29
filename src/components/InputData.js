@@ -1,10 +1,11 @@
-/* eslint-disable react/prop-types */
+
 import React from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { Box} from "@mui/material";
+import PropTypes from "prop-types";
 
 const InputData = ({handleSubmit, setEntryPoint, setDestinationPoint}) => {
   return (
@@ -17,17 +18,19 @@ const InputData = ({handleSubmit, setEntryPoint, setDestinationPoint}) => {
       <MyLocationIcon sx={{ color: "red", mr: 1, my: 0.5 }} />
       <TextField
         fullWidth
-        label="From"
+        label="Enter source address"
         variant="standard"
         onChange={(e) => setEntryPoint(e.target.value)}
+        required="true"
       />
       <p></p>
       <LocationOnIcon sx={{ color: "green", mr: 1, my: 0.5 }} />
       <TextField
         fullWidth
-        label="To"
+        label="Enter destination address"
         variant="standard"
         onChange={(e) => setDestinationPoint(e.target.value)}
+        required="true"
       />
       <p></p>
       <Button
@@ -40,6 +43,12 @@ const InputData = ({handleSubmit, setEntryPoint, setDestinationPoint}) => {
       </Button>
     </Box>
   );
+};
+
+InputData.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  setEntryPoint: PropTypes.func.isRequired,
+  setDestinationPoint: PropTypes.func.isRequired,
 };
 
 export default InputData;

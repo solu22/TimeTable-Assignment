@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -9,6 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Transportation from "./Transportation";
+import PropTypes from "prop-types";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -31,7 +31,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const TimeTable = ({ data }) => {
-  console.log("this is data", data);
   return (
     <>
       <TableContainer component={Paper}>
@@ -60,7 +59,6 @@ const TimeTable = ({ data }) => {
                       >
                         <Transportation item={item} />
                       </StyledTableRow>
-
                     </>
                   );
                 }
@@ -71,6 +69,10 @@ const TimeTable = ({ data }) => {
       </TableContainer>
     </>
   );
+};
+
+TimeTable.propTypes = {
+  data: PropTypes.object,
 };
 
 export default TimeTable;
