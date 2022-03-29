@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 const graphQlQuery = gql`
-  query GetRoute(
+  query (
     $sourceLat: Float!
     $sourceLong: Float!
     $desLat: Float!
@@ -10,7 +10,8 @@ const graphQlQuery = gql`
     plan(
       from: { lat: $sourceLat, lon: $sourceLong }
       to: { lat: $desLat, lon: $desLong }
-      numItineraries: 3
+      numItineraries: 13
+     
     ) {
       itineraries {
         legs {

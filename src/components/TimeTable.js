@@ -1,7 +1,8 @@
-import React from "react";
+import * as React from "react";
+import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -10,43 +11,61 @@ import Paper from "@mui/material/Paper";
 import TransportationStatus from "./TransportationStatus";
 import Transportation from "./Transportation";
 
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
+
 const TimeTable = ({ data }) => {
-
-  const tableHead = ["mode", "departure", "from", "to", "arrival", "duration"];
-
+  console.log("this is data", data);
   return (
     <>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 350 }} style={{ width: "100%" }}>
-          <TableHead style={{ backgroundColor: "black" }}>
+        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+          <TableHead>
             <TableRow>
-              {tableHead.map((thead, i) => (
-                <TableCell key={i} style={{ color: "white" }}>
-                  {thead.toUpperCase()}
-                </TableCell>
-              ))}
+              <StyledTableCell>MODE</StyledTableCell>
+              <StyledTableCell align="left" style={{ marginRight: "75%" }}>
+                DEPARTURE
+              </StyledTableCell>
+              <StyledTableCell align="left">FROM</StyledTableCell>
+              <StyledTableCell align="left">TO</StyledTableCell>
+              <StyledTableCell align="left">ARRIVAL</StyledTableCell>
+              <StyledTableCell>DURATION</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {data.plan.itineraries.map((info) =>
-              info.legs.map((item, i) => (
-                <>
-                  <TableRow
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    key={i}
-                    style={{ backgroundColor: "#1597E5" }}
-                  >
-                    <Transportation item={item} />
-                  </TableRow>
+              info.legs.map((item, i) => {
+                if (item.mode !== "WALK") {
+                  return (
+                    <>
+                      <StyledTableRow
+                        key={i}
+                        style={{ backgroundColor: "#1597E5" }}
+                      >
+                        <Transportation item={item} />
+                      </StyledTableRow>
 
-                  <TransportationStatus
-                    mode={item.mode}
-                    to={item.to.name}
-                    duration={item.duration}
-                    from={item.from.name}
-                  />
-                </>
-              ))
+                    </>
+                  );
+                }
+              })
             )}
           </TableBody>
         </Table>

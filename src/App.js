@@ -17,6 +17,9 @@ import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import getLocation from "./components/getLocation";
+import { useSelector } from "react-redux";
+import rootReducer from "./redux/reducers.js";
 
 function App() {
   const [entryPoint, setEntryPoint] = useState("");
@@ -29,6 +32,13 @@ function App() {
   });
 
   const [search, { data, loading }] = useLazyQuery(graphQlQuery);
+
+  const {currentLattitude, currentLongitude} = useSelector(state=>state.dataReducer)
+  
+  useEffect(()=>{
+   getLocation()
+  },[])
+
   useEffect(() => {
     fetchCoordinatesForPoint();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -50,8 +60,8 @@ function App() {
     );
 
     const coordinates = {
-      sourceLat: sourceAdress.data.features[0].geometry.coordinates[1],
-      sourceLong: sourceAdress.data.features[0].geometry.coordinates[0],
+      sourceLat: sourceAdress.data.features[0].geometry.coordinates[1] || currentLattitude,
+      sourceLong: sourceAdress.data.features[0].geometry.coordinates[0] || currentLongitude,
       desLat: destinationAdress.data.features[0].geometry.coordinates[1],
       desLong: destinationAdress.data.features[0].geometry.coordinates[0],
     };

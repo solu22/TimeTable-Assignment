@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from "react-redux";
+import store from './redux/store';
+
 import {
   ApolloClient,
   InMemoryCache,
@@ -11,8 +14,7 @@ import {
 } from "@apollo/client";
 
 
-
-const client = new ApolloClient({
+export const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({
     uri: "https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql",
@@ -22,11 +24,17 @@ const client = new ApolloClient({
 
 
 ReactDOM.render(
-  <ApolloProvider client= {client}>
-    <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  </ApolloProvider>,
+  
+    <ApolloProvider client= {client}>
+      <Provider store = {store}>
+        <React.StrictMode>
+            <App />
+      </React.StrictMode>
+      </Provider>
+    ,
+  </ApolloProvider>
+ 
+  ,
   
   document.getElementById('root')
 );

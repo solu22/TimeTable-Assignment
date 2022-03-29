@@ -8,8 +8,8 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 const TransportationStatus = ({mode, to, from, duration}) => {
   return (
-    <div>
-      {mode === "WALK" && to !== "Destination" && (
+    <>
+      {/* {mode === "WALK" && to !== "Destination" && (
         <Card
           style={{
             backgroundColor: "black",
@@ -28,9 +28,9 @@ const TransportationStatus = ({mode, to, from, duration}) => {
             </Typography>
           </CardContent>
         </Card>
-      )}
+      )} */}
 
-      {mode === "WALK" && to === "Destination" && (
+      {/* {mode === "WALK" && to === "Destination" && (
         <Card
           style={{
             backgroundColor: "black",
@@ -49,7 +49,7 @@ const TransportationStatus = ({mode, to, from, duration}) => {
             </Typography>
           </CardContent>
         </Card>
-      )}
+      )} */}
 
       {mode === "SUBWAY" && (
         <Card
@@ -113,7 +113,7 @@ const TransportationStatus = ({mode, to, from, duration}) => {
           </CardContent>
         </Card>
       )}
-    </div>
+    </>
   );
 }
 

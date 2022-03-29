@@ -10,7 +10,15 @@ const Header = () => {
         style={{ width: "150px", cursor: "pointer", marginTop: "5%" }}
         onClick="/"
       />
-      <Typography textAlign="center" variant="h4" color="gold" fontFamily="sans-serif" fontWeight="bolder">TerveTuloa</Typography>
+      <Typography
+        textAlign="center"
+        variant="h4"
+        color="#400082"
+        fontFamily="sans-serif"
+        fontWeight="bolder"
+      >
+        TerveTuloa
+      </Typography>
     </div>
   );
 }
