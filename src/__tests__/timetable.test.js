@@ -17,13 +17,25 @@ describe("Header Component", () => {
 
 describe("Form", () => {
   test("should render InputForm component", () => {
-    render(<InputData />);
+    render(
+      <InputData
+        setDestinationPoint={mockFn}
+        setEntryPoint={mockFn}
+        handleSubmit={mockFn}
+      />
+    );
     const input = screen.getByTestId("form");
     expect(input).toBeInTheDocument();
   });
 
   test("inputTextField should have label for sourceAddress", () => {
-    const component = render(<InputData />);
+    const component = render(
+      <InputData
+        setEntryPoint={mockFn}
+        setDestinationPoint={mockFn}
+        handleSubmit={mockFn}
+      />
+    );
     const textContentSource = component.getByPlaceholderText(
       "Enter source address"
     );
@@ -31,7 +43,13 @@ describe("Form", () => {
   });
 
   test("inputTextField should have label for destinationAddress", () => {
-    const component = render(<InputData />);
+    const component = render(
+      <InputData
+        setDestinationPoint={mockFn}
+        setEntryPoint={mockFn}
+        handleSubmit={mockFn}
+      />
+    );
     const textContentDestination = component.getByPlaceholderText(
       "Enter destination address"
     );
@@ -39,14 +57,26 @@ describe("Form", () => {
   });
 
   test("should be able to change source input value", () => {
-    render(<InputData setEntryPoint={mockFn} />);
+    render(
+      <InputData
+        setEntryPoint={mockFn}
+        setDestinationPoint={mockFn}
+        handleSubmit={mockFn}
+      />
+    );
     const inputElement = screen.getByPlaceholderText("Enter source address");
     fireEvent.change(inputElement, { target: { value: "Maria01" } });
     expect(inputElement.value).toBe("Maria01");
   });
 
   test("should be able to change destination input values", () => {
-    render(<InputData setDestinationPoint={mockFn} />);
+    render(
+      <InputData
+        setDestinationPoint={mockFn}
+        setEntryPoint={mockFn}
+        handleSubmit={mockFn}
+      />
+    );
     const inputElement = screen.getByPlaceholderText(
       "Enter destination address"
     );
@@ -55,7 +85,13 @@ describe("Form", () => {
   });
 
   test("should be able to submit form", () => {
-    const { getByRole } = render(<InputData handleSubmit={mockFn} />);
+    const { getByRole } = render(
+      <InputData
+        handleSubmit={mockFn}
+        setDestinationPoint={mockFn}
+        setEntryPoint={mockFn}
+      />
+    );
     const buttonElement = getByRole("button");
     fireEvent.submit(buttonElement);
     expect(mockFn).toHaveBeenCalledTimes(1);
