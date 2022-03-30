@@ -1,12 +1,13 @@
-import React from "react";
+/* Material-UI Import */
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
+/*React Import */
+import React from "react";
 
 const Loader = () => {
-  const proStyles={
-    color:"gold",
-    
+  const proStyles = {
+    color: "gold",
   };
   return (
     <div data-testid="loader">

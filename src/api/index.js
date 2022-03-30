@@ -1,0 +1,1 @@
+export let url = "https://api.digitransit.fi/geocoding/v1/search";

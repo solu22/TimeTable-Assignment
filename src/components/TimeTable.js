@@ -1,4 +1,4 @@
-import * as React from "react";
+/* Material-UI Import */
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,9 +7,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Transportation from "./Transportation";
 import PropTypes from "prop-types";
 import { Typography } from "@mui/material";
+
+/*React */
+import * as React from "react";
+import Transportation from "./Transportation";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -65,7 +68,6 @@ const TimeTable = ({ data, entryPoint, destinationPoint }) => {
                         <StyledTableRow
                           key={i}
                           style={{ backgroundColor: "#1597E5" }}
-                          
                         >
                           <Transportation item={item} />
                         </StyledTableRow>

@@ -1,13 +1,23 @@
 
-import React from "react";
+/* Material-UI Import */
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { Box} from "@mui/material";
+import { Box } from "@mui/material";
+
+/*React Import */
+import React from "react";
 import PropTypes from "prop-types";
 
-const InputData = ({handleSubmit, setEntryPoint, setDestinationPoint,entryPoint, destinationPoint}) => {
+
+const InputData = ({
+  handleSubmit,
+  setEntryPoint,
+  setDestinationPoint,
+  entryPoint,
+  destinationPoint,
+}) => {
   return (
     <Box
       sx={{ textAlign: "center" }}
@@ -58,7 +68,7 @@ InputData.propTypes = {
   setEntryPoint: PropTypes.func.isRequired,
   setDestinationPoint: PropTypes.func.isRequired,
   entryPoint: PropTypes.string,
-  destinationPoint:PropTypes.string
+  destinationPoint: PropTypes.string,
 };
 
 export default InputData;

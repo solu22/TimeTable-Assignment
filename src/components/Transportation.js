@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+/* Material-UI Import */
 import TableCell from "@mui/material/TableCell";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import TramIcon from "@mui/icons-material/Tram";
@@ -7,6 +7,9 @@ import DirectionsBoatIcon from "@mui/icons-material/DirectionsBoat";
 import SubwayIcon from "@mui/icons-material/Subway";
 import { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
+
+/*React Import */
+import React from "react";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -36,7 +39,11 @@ const Transportation = ({ item }) => {
         )}
       </StyledTableCell>
 
-      <StyledTableCell align="left" style={{ color: "whitesmoke" }} className= "starttime">
+      <StyledTableCell
+        align="left"
+        style={{ color: "whitesmoke" }}
+        className="starttime"
+      >
         {new Date(item.startTime).toLocaleString()}
       </StyledTableCell>
 

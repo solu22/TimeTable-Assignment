@@ -1,19 +1,15 @@
-
 const initState = {
   currentLattitude: "",
-  currentLongitude: ""
+  currentLongitude: "",
 };
 
-
-const reducers = (state = initState, action)=>{
+const reducers = (state = initState, action) => {
   switch (action.type) {
-    
   case "SET_CURRENT_LOCATION":
     return {
-          
       ...state,
       currentLattitude: action.payload.lat,
-      currentLongitude: action.payload.long
+      currentLongitude: action.payload.long,
     };
 
   default:

@@ -1,21 +1,23 @@
+/*Axios,Grpahql */
+import axios from "axios";
 import { useLazyQuery } from "@apollo/client";
 import graphQlQuery from "./graphQLQuery";
 
-import { useEffect, useState } from "react";
-import { Container, Typography } from "@mui/material";
-import axios from "axios";
-
-import Clock from "./components/Clock";
-import TimeTable from "./components/TimeTable";
-import InputData from "./components/InputData";
-import Header from "./components/Header";
-
-/**cards */
+/* Material-UI Import */
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import getLocation from "./components/getLocation";
+import { Container, Typography } from "@mui/material";
+
+/*React, Redux Import */
+import { useEffect, useState } from "react";
+import { url } from "./api";
+import Clock from "./components/Clock";
+import TimeTable from "./components/TimeTable";
+import InputData from "./components/InputData";
+import Header from "./components/Header";
 import { useSelector } from "react-redux";
 import Loader from "./components/Loader";
 
@@ -34,7 +36,7 @@ function App() {
   const { currentLattitude, currentLongitude } = useSelector(
     (state) => state.dataReducer
   );
- 
+
   useEffect(() => {
     getLocation();
   }, []);
@@ -43,19 +45,20 @@ function App() {
     fetchCoordinatesForPoint();
   }, [entryPoint, destinationPoint]);
 
-  useEffect(()=>{
+  useEffect(() => {
     data;
-  },[]);
+  }, []);
 
-  let url = "https://api.digitransit.fi/geocoding/v1/search";
+
+  let searchUrl = url;
 
   const fetchCoordinatesForPoint = async () => {
     let sourceAdress = await axios.get(
-      url + "?text=" + entryPoint.replace(" ", "%20") + "&size=1"
+      searchUrl + "?text=" + entryPoint.replace(" ", "%20") + "&size=1"
     );
 
     let destinationAdress = await axios.get(
-      url + "?text=" + destinationPoint.replace(" ", "%20") + "&size=1"
+      searchUrl + "?text=" + destinationPoint.replace(" ", "%20") + "&size=1"
     );
 
     const coordinates = {
@@ -107,9 +110,10 @@ function App() {
             <CardMedia
               component="img"
               height="140"
-              image="http://www.kokoromoi.com/wp-content/uploads/2017/09/KokoroMoi_HSL_Logo-1.gif"
-              alt="green iguana"
+              src="https://play-lh.googleusercontent.com/QmH_nu4O7uIgmUH-ki8EYBtx77aajbDphFrUiR69r4tBZ2bSticY7F4HNI735z1_7bI"
+              alt="hsl-card-image"
             />
+
             <Typography>
               <Clock />
             </Typography>

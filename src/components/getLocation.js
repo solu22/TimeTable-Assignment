@@ -1,3 +1,4 @@
+/*React, Redux Import */
 import { setCurrentCoordinates } from "../redux/action";
 import store from "../redux/store";
 
