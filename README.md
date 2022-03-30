@@ -32,4 +32,4 @@ Your task is to create an info screen, which displays the public transportation 
 
 ## My DEMO For This App
 ![](app.gif)
-
+![](test.gif)
