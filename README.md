@@ -1,70 +1,30 @@
-# Getting Started with Create React App
+# Assignment: Timetables
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Maria 01 is located at [Lapinlahdenkatu 16](https://www.google.com/maps/place/Lapinlahdenkatu+16,+00180+Helsinki,+Suomi). Even while it is close to various public transportation options, people might still be easily late from work. And what's worst, our people might forget to leave early as they are working on something challenging.
 
-## Available Scripts
+Your task is to help us leave at the right time so that they would not miss any important, or why not less important, commitments.
 
-In the project directory, you can run:
+## The task
 
-### `npm start`
+Your task is to create an info screen, which displays the public transportation timetables between a location or a stop of your selection and Maria 01. You can either display the schedules for the location someone would travel to Maria 01 from, or then schedules from Maria 01 to the location of your selection.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Mandatory
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* Use the Helsinki Regional Transport (HSL) [open data interface](https://www.hsl.fi/en/opendata).
+* Use [graphql](https://graphql.org/) as the query language.
+* Publish your solution as a user interface in cloud of your selection so that it is accessible through a browser (e.g. [Github Pages](https://pages.github.com/) or [Heroku](https://www.heroku.com/)).
+* Write the solution using [React](https://reactjs.org/) and [Redux](https://redux.js.org/).
+* Use a UI framework (e.g. [Material-UI](https://material-ui.com/)) and make the display pretty.
 
-### `npm test`
+### Optional
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* Use [docker](https://docs.docker.com/) for packaging your application, even if you published it in some other way.
+* Add [eslint](http://eslint.org/).
+* Add user interface (e.g. [Robot Framework](https://robotframework.org/)) and/or unit testing (e.g. [Jest](https://jestjs.io/)).
+* Add any funtionalities that do not disrupt the usability, but feel important to you.
 
-### `npm run build`
+## Returning your solution
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Publish the application into a cloud of your selection.
+* Create a personal repository in [github](https://github.com) where you push your solution into.
+* Send us the urls where to find the display and the code.
