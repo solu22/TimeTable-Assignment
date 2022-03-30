@@ -1,4 +1,3 @@
-
 import { useLazyQuery } from "@apollo/client";
 import graphQlQuery from "./graphQLQuery";
 
@@ -21,12 +20,10 @@ import { useSelector } from "react-redux";
 import Loader from "./components/Loader";
 
 function App() {
-
   const [entryPoint, setEntryPoint] = useState("");
   const [destinationPoint, setDestinationPoint] = useState("");
-  const [search, {data, loading}] = useLazyQuery(graphQlQuery);
-  
-  
+  const [search, { data, loading }] = useLazyQuery(graphQlQuery);
+
   const [coordinates, setCoordinates] = useState({
     sourceLat: "",
     sourceLong: "",
@@ -34,12 +31,10 @@ function App() {
     desLong: "",
   });
 
-
-
   const { currentLattitude, currentLongitude } = useSelector(
     (state) => state.dataReducer
   );
-
+ 
   useEffect(() => {
     getLocation();
   }, []);
@@ -48,7 +43,9 @@ function App() {
     fetchCoordinatesForPoint();
   }, [entryPoint, destinationPoint]);
 
-  if(loading) return <Loader/>;
+  useEffect(()=>{
+    data;
+  },[]);
 
   let url = "https://api.digitransit.fi/geocoding/v1/search";
 
@@ -85,8 +82,6 @@ function App() {
       },
     });
   };
-
-  
 
   return (
     <Container>
@@ -127,12 +122,25 @@ function App() {
                 handleSubmit={handleSubmit}
                 setEntryPoint={setEntryPoint}
                 setDestinationPoint={setDestinationPoint}
+                entryPoint={entryPoint}
+                destinationPoint={destinationPoint}
               />
             </CardContent>
           </Card>
         </Grid>
       </Grid>
-      {data && <TimeTable data={data} />}
+      {loading && !data && (
+        <p style={{ color: "red" }}>No schedule found for such address</p>
+      )}
+      {loading && <Loader />}
+
+      {data && (
+        <TimeTable
+          data={data}
+          entryPoint={entryPoint}
+          destinationPoint={destinationPoint}
+        />
+      )}
     </Container>
   );
 }

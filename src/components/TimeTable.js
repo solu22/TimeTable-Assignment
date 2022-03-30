@@ -9,6 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Transportation from "./Transportation";
 import PropTypes from "prop-types";
+import { Typography } from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -30,42 +31,52 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const TimeTable = ({ data }) => {
+const TimeTable = ({ data, entryPoint, destinationPoint }) => {
   return (
     <>
+      <Typography
+        color="green"
+        textAlign="center"
+        variant="h5"
+        marginBottom="10px"
+      >{`Bus timetable from ${entryPoint} to ${destinationPoint}`}</Typography>
+
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>MODE</StyledTableCell>
-              <StyledTableCell align="left" style={{ marginRight: "75%" }}>
-                DEPARTURE
-              </StyledTableCell>
-              <StyledTableCell align="left">FROM</StyledTableCell>
-              <StyledTableCell align="left">TO</StyledTableCell>
-              <StyledTableCell align="left">ARRIVAL</StyledTableCell>
-              <StyledTableCell>DURATION</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.plan.itineraries.map((info) =>
-              info.legs.map((item, i) => {
-                if (item.mode !== "WALK") {
-                  return (
-                    <>
-                      <StyledTableRow
-                        key={i}
-                        style={{ backgroundColor: "#1597E5" }}
-                      >
-                        <Transportation item={item} />
-                      </StyledTableRow>
-                    </>
-                  );
-                }
-              })
-            )}
-          </TableBody>
-        </Table>
+        <>
+          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>MODE</StyledTableCell>
+                <StyledTableCell align="left" style={{ marginRight: "75%" }}>
+                  DEPARTURE
+                </StyledTableCell>
+                <StyledTableCell align="left">FROM</StyledTableCell>
+                <StyledTableCell align="left">TO</StyledTableCell>
+                <StyledTableCell align="left">ARRIVAL</StyledTableCell>
+                <StyledTableCell align="right">DURATION</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.plan.itineraries.map((info) =>
+                info.legs.map((item, i) => {
+                  if (item.mode !== "WALK") {
+                    return (
+                      <>
+                        <StyledTableRow
+                          key={i}
+                          style={{ backgroundColor: "#1597E5" }}
+                          
+                        >
+                          <Transportation item={item} />
+                        </StyledTableRow>
+                      </>
+                    );
+                  }
+                })
+              )}
+            </TableBody>
+          </Table>
+        </>
       </TableContainer>
     </>
   );
@@ -73,6 +84,8 @@ const TimeTable = ({ data }) => {
 
 TimeTable.propTypes = {
   data: PropTypes.object,
+  entryPoint: PropTypes.string,
+  destinationPoint: PropTypes.string,
 };
 
 export default TimeTable;

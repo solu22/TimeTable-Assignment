@@ -3,12 +3,12 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div>
+    <div data-testid = "header-1">
       <img
         src="https://upload.wikimedia.org/wikipedia/fi/thumb/c/cc/HSL_logo.svg/1200px-HSL_logo.svg.png"
         alt="logo"
         style={{ width: "150px", cursor: "pointer", marginTop: "5%" }}
-        onClick="/"
+        
       />
       <Typography
         textAlign="center"

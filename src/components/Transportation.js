@@ -36,7 +36,7 @@ const Transportation = ({ item }) => {
         )}
       </StyledTableCell>
 
-      <StyledTableCell align="left" style={{ color: "whitesmoke" }}>
+      <StyledTableCell align="left" style={{ color: "whitesmoke" }} className= "starttime">
         {new Date(item.startTime).toLocaleString()}
       </StyledTableCell>
 

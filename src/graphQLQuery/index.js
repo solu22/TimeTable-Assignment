@@ -21,10 +21,6 @@ const graphQlQuery = gql`
           duration
           from {
             name
-            stop {
-              code
-              name
-            }
           }
           to {
             name
