@@ -16,7 +16,7 @@ const Loader = () => {
           sx={proStyles}
           thickness={1}
           size={250}
-          style={{ padding: "10px" }}
+          style={{ padding: "11px" }}
         />
       </Box>
     </div>
