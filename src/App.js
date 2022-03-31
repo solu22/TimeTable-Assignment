@@ -10,6 +10,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import getLocation from "./components/getLocation";
 import { Container, Typography } from "@mui/material";
+import Alert from "@mui/material/Alert";
+import { Button } from "@mui/material";
+
 
 /*React, Redux Import */
 import { useEffect, useState } from "react";
@@ -24,7 +27,7 @@ import Loader from "./components/Loader";
 function App() {
   const [entryPoint, setEntryPoint] = useState("");
   const [destinationPoint, setDestinationPoint] = useState("");
-  const [search, { data, loading }] = useLazyQuery(graphQlQuery);
+  const [search, { data, loading, error}] = useLazyQuery(graphQlQuery);
 
   const [coordinates, setCoordinates] = useState({
     sourceLat: "",
@@ -45,9 +48,7 @@ function App() {
     fetchCoordinatesForPoint();
   }, [entryPoint, destinationPoint]);
 
-  useEffect(() => {
-    data;
-  }, []);
+ 
 
 
   let searchUrl = url;
@@ -85,6 +86,48 @@ function App() {
       },
     });
   };
+
+  if(loading){
+    return <Loader />;
+  }
+
+  if(entryPoint.includes("aaa") && destinationPoint.includes("aaa")){
+    return (
+      <Alert severity="error" style={{ textAlign: "center" }}>
+        <p style={{ fontStyle: "normal", fontWeight: "bolder" }}>
+          This is an API error test
+        </p>
+        <Button href="/" variant="contained">
+          Back To Home
+        </Button>
+      </Alert>
+    );
+  }
+
+  if(error){
+    return (
+      <Alert severity="error" style={{ textAlign: "center" }}>
+        <p style={{ fontStyle: "normal", fontWeight: "bolder" }}>
+          {error.message}
+        </p>
+        <Button href="/" variant="contained">
+          Back To Home
+        </Button>
+      </Alert>
+    );
+  }
+
+  if (data && data.plan.itineraries.length == 0){
+    return (
+      <Alert severity="error" style= {{textAlign:"center"}}>
+        <p style= {{fontStyle:"normal", fontWeight:"bolder"}}>No Route Found for given address</p>
+        <Button href="/" variant="contained">
+          Back To Home
+        </Button>
+      </Alert>
+    );
+  }
+    
 
   return (
     <Container>
@@ -133,12 +176,8 @@ function App() {
           </Card>
         </Grid>
       </Grid>
-      {loading && !data && (
-        <p style={{ color: "red" }}>No schedule found for such address</p>
-      )}
-      {loading && <Loader />}
 
-      {data && (
+      {data && data.plan.itineraries.length !== 0 && (
         <TimeTable
           data={data}
           entryPoint={entryPoint}
