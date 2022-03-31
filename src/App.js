@@ -8,83 +8,65 @@ import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import getLocation from "./components/getLocation";
+//import getLocation from "./components/getLocation";
 import { Container, Typography } from "@mui/material";
 
 /*React, Redux Import */
-import { useEffect, useState } from "react";
+
+import { useState, useEffect } from "react";
 import { url } from "./api";
 import Clock from "./components/Clock";
 import TimeTable from "./components/TimeTable";
 import InputData from "./components/InputData";
 import Header from "./components/Header";
-import { useSelector } from "react-redux";
+
+//import { useSelector } from "react-redux";
 import Loader from "./components/Loader";
 
 function App() {
   const [entryPoint, setEntryPoint] = useState("");
   const [destinationPoint, setDestinationPoint] = useState("");
-  const [search, { data, loading }] = useLazyQuery(graphQlQuery);
-
-  const [coordinates, setCoordinates] = useState({
-    sourceLat: "",
-    sourceLong: "",
-    desLat: "",
-    desLong: "",
-  });
-
-  const { currentLattitude, currentLongitude } = useSelector(
-    (state) => state.dataReducer
-  );
-
-  useEffect(() => {
-    getLocation();
-  }, []);
-
-  useEffect(() => {
-    fetchCoordinatesForPoint();
-  }, [entryPoint, destinationPoint]);
-
-  useEffect(() => {
-    data;
-  }, []);
-
+  const [searchDataFrom, setSearchDataFrom] = useState([]);
+  const [searchDataTo, setSearchDataTo] = useState([]);
+  const [coordinatesFromLat, setCoordinatesFromLat] = useState(null);
+  const [coordinatesToLat, setCoordinatesToLat] = useState(null);
+  const [coordinatesFromLong, setCoordinatesFromLong] = useState(null);
+  const [coordinatesToLong, setCoordinatesToLong] = useState(null);
+  const [search, { loading, data }] = useLazyQuery(graphQlQuery);
+  console.log("checkdata", data);
 
   let searchUrl = url;
 
-  const fetchCoordinatesForPoint = async () => {
-    let sourceAdress = await axios.get(
-      searchUrl + "?text=" + entryPoint.replace(" ", "%20") + "&size=1"
-    );
+  const getData = async () => {
+    const source = await axios.get(`${searchUrl}?text=${entryPoint}`);
+    setSearchDataFrom(source.data.features);
 
-    let destinationAdress = await axios.get(
-      searchUrl + "?text=" + destinationPoint.replace(" ", "%20") + "&size=1"
-    );
+    const destination = await axios.get(`${searchUrl}?text=${destinationPoint}`);
+    setSearchDataTo(destination.data.features);
 
-    const coordinates = {
-      sourceLat:
-        sourceAdress.data.features[0].geometry.coordinates[1] ||
-        currentLattitude,
-      sourceLong:
-        sourceAdress.data.features[0].geometry.coordinates[0] ||
-        currentLongitude,
-      desLat: destinationAdress.data.features[0].geometry.coordinates[1],
-      desLong: destinationAdress.data.features[0].geometry.coordinates[0],
-    };
-    setCoordinates(coordinates);
   };
+
+  useEffect(() => {
+    getData();
+  }, [entryPoint, destinationPoint]);
+
+ 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     search({
       variables: {
-        sourceLat: coordinates.sourceLat,
-        sourceLong: coordinates.sourceLong,
-        desLat: coordinates.desLat,
-        desLong: coordinates.desLong,
+        sourceLat: coordinatesFromLat,
+        sourceLong: coordinatesFromLong,
+        desLat: coordinatesToLat,
+        desLong: coordinatesToLong,
       },
     });
   };
+
+  {
+    loading && <Loader />;
+  }
 
   return (
     <Container>
@@ -126,17 +108,17 @@ function App() {
                 handleSubmit={handleSubmit}
                 setEntryPoint={setEntryPoint}
                 setDestinationPoint={setDestinationPoint}
-                entryPoint={entryPoint}
-                destinationPoint={destinationPoint}
+                searchDataFrom={searchDataFrom}
+                searchDataTo={searchDataTo}
+                setCoordinatesFromLat={setCoordinatesFromLat}
+                setCoordinatesFromLong={setCoordinatesFromLong}
+                setCoordinatesToLat={setCoordinatesToLat}
+                setCoordinatesToLong={setCoordinatesToLong}
               />
             </CardContent>
           </Card>
         </Grid>
       </Grid>
-      {loading && !data && (
-        <p style={{ color: "red" }}>No schedule found for such address</p>
-      )}
-      {loading && <Loader />}
 
       {data && (
         <TimeTable

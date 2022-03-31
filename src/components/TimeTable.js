@@ -1,3 +1,4 @@
+
 /* Material-UI Import */
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -10,8 +11,8 @@ import Paper from "@mui/material/Paper";
 import PropTypes from "prop-types";
 import { Typography } from "@mui/material";
 
-/*React */
-import * as React from "react";
+/*React import */
+import React from "react";
 import Transportation from "./Transportation";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -43,7 +44,6 @@ const TimeTable = ({ data, entryPoint, destinationPoint }) => {
         variant="h5"
         marginBottom="10px"
       >{`Bus timetable from ${entryPoint} to ${destinationPoint}`}</Typography>
-
       <TableContainer component={Paper}>
         <>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -88,6 +88,8 @@ TimeTable.propTypes = {
   data: PropTypes.object,
   entryPoint: PropTypes.string,
   destinationPoint: PropTypes.string,
+  setErrorMessage: PropTypes.func,
+  loading: PropTypes.bool,
 };
 
 export default TimeTable;
