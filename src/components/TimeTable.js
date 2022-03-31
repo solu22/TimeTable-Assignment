@@ -42,7 +42,7 @@ const TimeTable = ({ data, entryPoint, destinationPoint }) => {
         textAlign="center"
         variant="h5"
         marginBottom="10px"
-      >{`Bus timetable from ${entryPoint} to ${destinationPoint}`}</Typography>
+      >{`Transportation schedule from ${entryPoint} to ${destinationPoint}`}</Typography>
 
       <TableContainer component={Paper}>
         <>
