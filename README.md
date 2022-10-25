@@ -30,6 +30,4 @@ Your task is to create an info screen, which displays the public transportation 
 * Send us the urls where to find the display and the code.
 
 
-## My DEMO For This App
-![](app.gif)
-![](test.gif)
+
