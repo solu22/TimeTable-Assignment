@@ -29,7 +29,3 @@ Your task is to create an info screen, which displays the public transportation 
 * Create a personal repository in [github](https://github.com) where you push your solution into.
 * Send us the urls where to find the display and the code.
 
-
-## My DEMO For This App
-![](app.gif)
-![](test.gif)
